@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdwb7bbmjnscf"]
+
+[ext_resource type="Script" uid="uid://lrbttsbortt6" path="res://test_drag.gd" id="1_s5ksy"]
+[ext_resource type="Script" uid="uid://lph2r3fnigy8" path="res://spring_joint.gd" id="2_e3kos"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ub6ui"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ub6ui"]
+radius = 15.0
+
+[node name="BodyA" type="RigidBody2D" node_paths=PackedStringArray("local_root", "joints")]
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_ub6ui")
+can_sleep = false
+script = ExtResource("1_s5ksy")
+local_root = NodePath(".")
+joints = [NodePath("SpringJointAB"), NodePath("BodyB/SpringJointBC"), NodePath("BodyC/SpringJointCA")]
+
+[node name="SpringJointAB" type="DampedSpringJoint2D" parent="."]
+visible = false
+rotation = -1.57174
+node_a = NodePath("..")
+node_b = NodePath("../BodyB")
+bias = 0.2
+disable_collision = false
+length = 70.0
+rest_length = 50.0
+stiffness = 64.0
+damping = 16.0
+script = ExtResource("2_e3kos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ub6ui")
+
+[node name="BodyB" type="RigidBody2D" parent="." node_paths=PackedStringArray("local_root")]
+position = Vector2(40, 0)
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_ub6ui")
+can_sleep = false
+script = ExtResource("1_s5ksy")
+local_root = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyB"]
+shape = SubResource("CircleShape2D_ub6ui")
+
+[node name="SpringJointBC" type="DampedSpringJoint2D" parent="BodyB"]
+visible = false
+rotation = 2.62253
+node_a = NodePath("..")
+node_b = NodePath("../../BodyC")
+bias = 0.2
+disable_collision = false
+length = 70.0
+rest_length = 50.0
+stiffness = 64.0
+damping = 16.0
+script = ExtResource("2_e3kos")
+
+[node name="BodyC" type="RigidBody2D" parent="." node_paths=PackedStringArray("local_root")]
+position = Vector2(20, -35)
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_ub6ui")
+can_sleep = false
+script = ExtResource("1_s5ksy")
+local_root = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyC"]
+shape = SubResource("CircleShape2D_ub6ui")
+
+[node name="SpringJointCA" type="DampedSpringJoint2D" parent="BodyC"]
+visible = false
+rotation = 0.521697
+node_a = NodePath("..")
+node_b = NodePath("../..")
+bias = 0.2
+disable_collision = false
+length = 70.0
+rest_length = 50.0
+stiffness = 64.0
+damping = 16.0
+script = ExtResource("2_e3kos")
