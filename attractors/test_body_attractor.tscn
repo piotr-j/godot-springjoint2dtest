@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdga3mduliano"]
+
+[ext_resource type="Script" uid="uid://cd6wk8myxm41i" path="res://attractors/attractor.gd" id="1_id8fj"]
+[ext_resource type="Script" uid="uid://ci77e0mwj5bmb" path="res://attractors/test_body_attractor.gd" id="1_vpeqj"]
+[ext_resource type="Script" uid="uid://cm4x4b3xw5gdi" path="res://attractors/rigid_body_2d.gd" id="2_3ev3k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qee3a"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_id8fj"]
+radius = 15.0
+
+[node name="TestBodyAttractor" type="Node2D"]
+script = ExtResource("1_vpeqj")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("2_3ev3k")
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_id8fj")
+max_force = 10000.0
+dst_end = 60.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_qee3a")
+debug_color = Color(0.783419, 0.22632, 0.907035, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_id8fj")
+
+[connection signal="body_entered" from="RigidBody2D/Area2D" to="RigidBody2D/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="RigidBody2D/Area2D" to="RigidBody2D/Area2D" method="_on_body_exited"]

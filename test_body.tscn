@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://lph2r3fnigy8" path="res://spring_joint.gd" id="2_e3kos"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ub6ui"]
+bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ub6ui"]
 radius = 15.0
@@ -21,12 +22,11 @@ visible = false
 rotation = -1.57174
 node_a = NodePath("..")
 node_b = NodePath("../BodyB")
-bias = 0.2
+bias = 0.02
 disable_collision = false
-length = 70.0
-rest_length = 50.0
+length = 35.0
+rest_length = 35.0
 stiffness = 64.0
-damping = 16.0
 script = ExtResource("2_e3kos")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -48,12 +48,11 @@ visible = false
 rotation = 2.62253
 node_a = NodePath("..")
 node_b = NodePath("../../BodyC")
-bias = 0.2
+bias = 0.02
 disable_collision = false
-length = 70.0
-rest_length = 50.0
+length = 35.0
+rest_length = 35.0
 stiffness = 64.0
-damping = 16.0
 script = ExtResource("2_e3kos")
 
 [node name="BodyC" type="RigidBody2D" parent="." node_paths=PackedStringArray("local_root")]
@@ -72,10 +71,9 @@ visible = false
 rotation = 0.521697
 node_a = NodePath("..")
 node_b = NodePath("../..")
-bias = 0.2
+bias = 0.02
 disable_collision = false
-length = 70.0
-rest_length = 50.0
+length = 35.0
+rest_length = 35.0
 stiffness = 64.0
-damping = 16.0
 script = ExtResource("2_e3kos")

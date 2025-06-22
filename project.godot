@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SpringJointTesting"
-run/main_scene="uid://r1wbu3s4g387"
+run/main_scene="uid://dx8ttdjj7ew"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
